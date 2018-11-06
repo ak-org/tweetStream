@@ -1,5 +1,6 @@
 import pandas as pd 
 import json
+import io
 
 class TweetAnalyzer():
     '''
@@ -27,8 +28,8 @@ class TweetAnalyzer():
         return df
     def save_tweets_df_to_csv(self, fname, df, append_flag):
         if append_flag == False:
-            with open(fname, 'w') as f:
-                df.to_csv(f, header=True)
+            with io.open(fname, 'w', encoding='utf-8', errors='replace') as f:
+                df.to_csv(f, header=True, encoding='utf-8')
         else:
-            with open(fname, 'a') as f:
-                df.to_csv(f, header=False)        
+            with io.open(fname, 'a',encoding='utf-8', errors='replace') as f:
+                df.to_csv(f, header=False, encoding='utf-8')        
