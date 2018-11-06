@@ -21,13 +21,18 @@ if __name__ == "__main__":
 
 
         json_data = []
+        tweet_count = 0
         for tweet in data:
             tweet_data = json.loads(tweet)
-            json_data.append(tweet_data[0])
-        print("Total Tweets = ", len(json_data))
+            if len(tweet_data) > 0:
+                json_data.append(tweet_data[0])
+                tweet_count += 1
+                sys.stdout.write("\r" + str(tweet_count))
+                sys.stdout.flush()
+        print("\nTotal Tweets = ", len(json_data))
 
         tweet_analyzer = TweetAnalyzer()
         tweets_df = tweet_analyzer.convert_tweets_to_dataframe(json_data)
         tweet_analyzer.save_tweets_df_to_csv(fname = csv_fname, df = tweets_df, append_flag = append)
     
-    print("Done")
+    print("Processing Done")

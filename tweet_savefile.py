@@ -67,7 +67,7 @@ if __name__ == '__main__':
         print("If file already exists, new contents are appended to the end")
         exit
     else:
-        tweet_filters = ["midterms", "midterm elections", "midterms elections", "republican", "democrat", "republicans", "democrats"]
+        tweet_filters = ["vote", "midterms", "midterm elections", "midterms elections", "republican", "democrat", "republicans", "democrats"]
         save_fname = sys.argv[1] ## expect a file name as first argument
         streamer = TwitterStreamer()
         streamer.stream_tweets(save_fname, tweet_filters)
