@@ -2,13 +2,14 @@
 import pandas as pd 
 import json
 import io
+from source_sanitize import parsed_values
 
 class TweetAnalyzer():
     '''
     analyze tweets and convert it into a dataframe
     '''
     def convert_tweets_to_dataframe(self, json_data):
-        df = pd.DataFrame(columns=['id', 'tweet_text', 'user_id','user_screen_name', 
+        df = pd.DataFrame(columns=['id', 'tweet_text', 'source','user_id','user_screen_name', 
                                    'user_follower_count','user_location', 'lang', 'timestamp_sec'])
         tweets_dict = {}
         for i in range(len(json_data)): #    len(tweets)  or 5 for testing
@@ -19,7 +20,8 @@ class TweetAnalyzer():
                 else:
                     tweet_text = json_data[i]['extended_tweet']['full_text']
                 df.loc[i] = ([json_data[i]['id'],
-                        tweet_text.replace('\n',''),   
+                        tweet_text.replace('\n',''),  
+                        parsed_values(json_data[i]['source']), 
                         json_data[i]['user']['id'],
                         json_data[i]['user']['screen_name'],
                         json_data[i]['user']['followers_count'],
