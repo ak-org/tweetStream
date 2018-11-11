@@ -32,8 +32,8 @@ class TweetAnalyzer():
     def save_tweets_df_to_csv(self, fname, df, append_flag):
         if append_flag == False:
             with io.open(fname, 'w', encoding='utf-8', errors='replace') as f:
-                df.to_csv(f, header=True, encoding='utf-8')
+                df.to_csv(f, header=True, encoding='utf-8', index=False)
         else:
             with io.open(fname, 'a',encoding='utf-8', errors='replace') as f:
-                df.to_csv(f, header=False, encoding='utf-8')        
+                df.to_csv(f, header=False, encoding='utf-8', index=False)         
 
